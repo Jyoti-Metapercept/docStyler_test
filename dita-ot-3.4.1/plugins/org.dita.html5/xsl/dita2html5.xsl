@@ -49,7 +49,7 @@
             box-sizing:border-box;
             margin:0;
           }
-          .container nav[role="toc"]{
+          .container :is(nav[role="toc"],nav[class="toc"]){
             width:auto;
             max-width:fit-content;
             display:flex;
@@ -92,7 +92,7 @@
           main[role="main"]{
             padding:30px;
           }
-          nav[role="toc"]{
+          :is(nav[role="toc"],nav[class="toc"]){
             position:sticky;
             top:80px;
             height:100vh;
@@ -101,19 +101,19 @@
             padding-top:10px;
             max-width:600px;
           }
-          nav[role="toc"]>ul>li:last-child{
+          :is(nav[role="toc"],nav[class="toc"])>ul>li:last-child{
             padding-bottom:300px;
           }
-          nav[role="toc"] li{
+          :is(nav[role="toc"],nav[class="toc"]) li{
             list-style-type: none; 
             padding:10px;
             border-radius:6px;
           }
-          nav[role="toc"] li a{
+          :is(nav[role="toc"],nav[class="toc"]) li a{
             text-decoration:none;
             color:grey;
           }
-          nav[role="toc"] li a:hover{
+          :is(nav[role="toc"],nav[class="toc"]) li a:hover{
             color:white;
           }
           ::-webkit-scrollbar {
@@ -123,7 +123,7 @@
           ::-webkit-scrollbar-thumb {
             background-color: transparent;
           }
-          .container nav[role="toc"] li[class="active"]>a{
+          .container :is(nav[role="toc"],nav[class="toc"]) li[class="active"]>a{
             color:white;
             background-color:grey;
             border-radius:6px;
