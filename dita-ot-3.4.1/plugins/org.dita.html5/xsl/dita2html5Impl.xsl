@@ -91,6 +91,10 @@
             background-color:#563D7C;
             overflow:scroll;
             padding-top:10px;
+            max-width:600px;
+          }
+          nav[role="toc"] ul>li:last-child{
+            padding-bottom:300px;
           }
           nav[role="toc"] li{
             list-style-type: none; 
@@ -113,9 +117,10 @@
           }
           .container nav[role="toc"] li[class="active"]>a{
             color:white;
-          }
-          .container nav[role="toc"] li[class="active"]{
             background-color:grey;
+            border-radius:6px;
+            padding:10px 20px;
+            display:inline-block;
           }
         </style>
       </head>
