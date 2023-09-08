@@ -113,9 +113,10 @@
           }
           .container nav[role="toc"] li[class="active"]>a{
             color:white;
-          }
-          .container nav[role="toc"] li[class="active"]{
             background-color:grey;
+            border-radius:6px;
+            padding:10px 20px;
+            display:inline-block;
           }
         </style>
       </head>
