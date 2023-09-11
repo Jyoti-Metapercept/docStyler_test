@@ -32,110 +32,17 @@
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
           crossorigin="anonymous"
         />
-
         <!-- Your custom CSS styles here -->
-
-        <style>
-          *{
-            font-family:courier;
-          }
-          body {
-            font-family: "Helvetica Neue", Helvetica;
-            background: #f4f6fa;
-            overflow:scroll;
-          }
-          .container {
-            padding-top:80px;
-            box-sizing:border-box;
-            margin:0;
-          }
-          .container :is(nav[role="toc"],nav[class="toc"]){
-            width:auto;
-            max-width:fit-content;
-            display:flex;
-          }
-          .container main[role="main"]{
-            width:auto;
-            max-width:fit-content;
-            display:flex;
-          }
-          .container .row{
-            display:grid;
-            grid-template-columns: 30% 70%;
-          }
-          #navbar{
-            position:fixed;
-            z-index:10;
-            top:0;
-            left:0;
-            padding:0 60px;
-            box-sizing:border-box;
-            display:flex;
-            gap:20px;
-            align-items:center;
-            justify-content:right;
-            height:80px;
-            width:100vw;
-            background-color:grey;
-          }
-          input{
-            border-radius:6px;
-            padding:0 16px;
-          }
-          button{
-            border-radius:6px;
-            border: 2px solid blue;
-          }
-          input:focus{
-            outline:none;
-          }
-          main[role="main"]{
-            padding:30px;
-          }
-          :is(nav[role="toc"],nav[class="toc"]){
-            position:sticky;
-            top:80px;
-            height:100vh;
-            background-color:#563D7C;
-            overflow:scroll;
-            padding-top:10px;
-            max-width:600px;
-          }
-          :is(nav[role="toc"],nav[class="toc"])>ul>li:last-child{
-            padding-bottom:300px;
-          }
-          :is(nav[role="toc"],nav[class="toc"]) li{
-            list-style-type: none; 
-            padding:10px;
-            border-radius:6px;
-          }
-          :is(nav[role="toc"],nav[class="toc"]) li a{
-            text-decoration:none;
-            color:grey;
-          }
-          :is(nav[role="toc"],nav[class="toc"]) li a:hover{
-            color:white;
-          }
-          ::-webkit-scrollbar {
-            width: 0;
-            height: 0;
-          }
-          ::-webkit-scrollbar-thumb {
-            background-color: transparent;
-          }
-          .container :is(nav[role="toc"],nav[class="toc"]) li[class="active"]>a{
-            color:white;
-            background-color:grey;
-            border-radius:6px;
-            padding:10px 20px;
-            display:inline-block;
-          }
-        </style>
       </head>
       <body>
         <div id="navbar">
-          <input type="text" placeholder="type something to find"/>
-          <button>&#128269;</button>
+          <div>
+            <span onclick="openMenu()" id="menuToggle">&#x2630;</span>
+          </div>
+          <div id="searchBar">
+            <input type="text" placeholder="type something to find"/>
+            <button>&#128269;</button>
+          </div>
         </div>
         <div class="container">
             <div class="row">
@@ -144,5 +51,46 @@
             </div>
         </div>
       </body>
-    </html> </xsl:template>
+    </html> 
+    <script>
+      const expandmenu = document.querySelectorAll(`.container :is(nav[role="toc"],nav[class="toc"]) li:has(>ul)`)
+      addCollapsibleMenu(expandmenu)
+      function handleCollapse(){
+        event.target.classList.toggle("rotate-dropdown-arrow")
+        event.target.nextElementSibling.nextElementSibling.classList.toggle("show-submenu")
+      }
+
+      function openMenu(){
+        const menu = document.querySelector(`.container :is(nav[role="toc"],nav[class="toc"])`)
+        menu.classList.toggle("hide-menu")
+      }
+
+      function addCollapsibleMenu(allTopics){
+        allTopics.forEach((topic) => {
+          topic.childNodes[1].classList.add("hide-submenu");
+          const collapseButton = document.createElement("span");
+          collapseButton.innerHTML = "&#10151;";
+          collapseButton.style.padding = "0 8px";
+          collapseButton.style.display = "inline-block";
+          collapseButton.style.transition = "transform 0.3s";
+          collapseButton.style.cursor = "pointer";
+          collapseButton.addEventListener("click", handleCollapse);
+          topic.insertBefore(collapseButton, topic.firstChild);
+      });
+      }
+      function trackActiveTopic(){
+        const activeTopic = document.querySelector(`.container :is(nav[role="toc"],nav[class="toc"]) .active`)
+        keepCollapsableMenuOpen(activeTopic)
+      }
+      function keepCollapsableMenuOpen(activeTopic){
+        if(activeTopic.nodeName === "NAV") return 
+        if(activeTopic.parentElement.classList.contains("hide-submenu")){
+          activeTopic.parentElement.classList.toggle("show-submenu")
+          activeTopic.parentElement?.previousElementSibling?.previousElementSibling?.classList.toggle("rotate-dropdown-arrow")
+        }
+        keepCollapsableMenuOpen(activeTopic.parentElement)
+      }
+      trackActiveTopic()
+    </script>
+  </xsl:template>
   </xsl:stylesheet>

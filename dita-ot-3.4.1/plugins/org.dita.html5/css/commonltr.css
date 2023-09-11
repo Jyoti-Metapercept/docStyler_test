@@ -5,6 +5,138 @@
  *
  * See the accompanying LICENSE file for applicable license.
  */
+ *{
+  font-family:sans-serif;
+}
+body {
+  font-family: "Helvetica Neue", Helvetica;
+  background: #f4f6fa;
+  overflow:scroll;
+}
+.container {
+  padding-top:80px;
+  box-sizing:border-box;
+  margin:0;
+  max-width:100vw;
+  --bs-gutter-x:0;
+}
+.container main[role="main"]{
+  width:auto;
+  max-width:fit-content;
+  display:flex;
+}
+.container .row{
+  display:grid;
+  grid-template-columns: 25% 75%;
+  transition:0.8s;
+}
+#navbar{
+  position:fixed;
+  z-index:10;
+  top:0;
+  left:0;
+  padding:0 60px;
+  box-sizing:border-box;
+  display:flex;
+  gap:20px;
+  align-items:center;
+  justify-content:space-between;
+  height:80px;
+  width:100vw;
+  background-color:#563D7C;
+}
+main[role="main"]{
+  padding:60px;
+}
+.container :is(nav[role="toc"],nav[class="toc"]){
+  position:sticky;
+  top:80px;
+  height:100vh;
+  background-color:#EAF1FB;
+  overflow:scroll;
+  padding-top:10px;
+  max-width:450px;
+  transition: 0.8s;
+}
+:is(nav[role="toc"],nav[class="toc"])>ul>li:last-child{
+  margin-bottom:300px;
+}
+:is(nav[role="toc"],nav[class="toc"])>ul>li{
+  border-bottom:1px solid grey;
+  font-weight:700;
+}
+:is(nav[role="toc"],nav[class="toc"])>ul>li li{
+  font-weight:400;
+}
+:is(nav[role="toc"],nav[class="toc"]) li{
+  list-style-type: none; 
+  padding:10px;
+}
+:is(nav[role="toc"],nav[class="toc"]) li a{
+  text-decoration:none;
+  color:black;
+}
+:is(nav[role="toc"],nav[class="toc"]) li a:hover{
+  color:blue;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+.container :is(nav[role="toc"],nav[class="toc"]) li[class="active"]>a{
+  color:blue;
+  font-weight:600;
+  border-radius:6px;
+  display:inline-block;
+}
+.rotate-dropdown-arrow{
+  transform:rotate(90deg)
+}
+.hide-submenu{
+  max-height:0px;
+  overflow: hidden;
+  transition: max-height 0.8s ease-out -0.5s;
+}
+.show-submenu{
+  max-height:10000px;
+  transition: max-height 0.8s ease-in;
+}
+#searchBar{
+  display:flex;
+  align-items:center;
+  position:relative;
+}
+#searchBar input{
+  border-radius:100px;
+  padding:8px 16px;
+  width:20vw;
+  min-width:200px;
+  max-width:400px
+}
+#searchBar input:focus{
+  outline:none;
+}
+#searchBar button{
+  position:absolute;
+  right:10px;
+  border:none;
+  padding: 4px 6px;
+  border-radius:50%;
+}
+#menuToggle{
+  color:white;
+  font-size: 28px;
+  cursor:pointer;
+}
+.container .row:has(>.hide-menu){
+  grid-template-columns: 0 100%;
+  transition: 0.5s;
+}
+
+
 .hazardstatement td,
 .hazardstatement th {
   padding: 0.5rem;

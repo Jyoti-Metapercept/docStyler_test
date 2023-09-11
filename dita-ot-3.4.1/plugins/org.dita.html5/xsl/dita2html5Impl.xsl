@@ -55,6 +55,7 @@
             padding-top:80px;
             box-sizing:border-box;
             margin:0;
+            max-width:100vw;
           }
           #navbar{
             position:fixed;
@@ -91,7 +92,7 @@
             background-color:#563D7C;
             overflow:scroll;
             padding-top:10px;
-            max-width:600px;
+            max-width:450px;
           }
           :is(nav[role="toc"],nav[class="toc"])>ul>li:last-child{
             padding-bottom:300px;
